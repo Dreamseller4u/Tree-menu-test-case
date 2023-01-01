@@ -1,0 +1,19 @@
+{{name}}
+{% load menu_tree %}
+{% for item in menu_items %}
+<ul>
+    <li class="menu-item-{{ item.id }}">
+        <a href={% url 'main_pk' pk=item.id %} style="{% if item.active %}color:red{% endif %}">{{item.title}}</a><br>
+
+        {% draw_menu menu item.id %}
+
+    </li>
+    <ul>
+        {% if url_pk == item.id %}
+        {% for i in item.child %}
+        <li><a href={% url 'main_pk' pk=i.id %}>{{i.title}}</a> <br></li>
+        {% endfor %}
+        {%endif %}
+    </ul>
+</ul>
+{% endfor %}
